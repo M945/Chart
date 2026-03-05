@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Sylvia 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+```
+body {
+  min-height: 100vh;
+  background: #ff85a1;
+  background: linear-gradient(135deg, #ff2d78, #ff85a1, #ffb347, #ff2d78, #ff6eb4);
+  background-size: 400% 400%;
+  animation: bgShift 4s ease infinite;
+  font-family: 'Comic Neue', cursive;
+  overflow-x: hidden;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E❤️%3C/text%3E%3C/svg%3E"), auto;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating hearts background */
+.hearts-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.kisses-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.heart-float {
+  position: absolute;
+  top: -80px;
+  font-size: 2rem;
+  animation: fallDown linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes fallDown {
+  0%   { transform: translateY(0) rotate(-15deg) scale(1);     opacity: 0.9; }
+  50%  { transform: translateY(50vh) rotate(15deg) scale(1.1); opacity: 0.7; }
+  100% { transform: translateY(115vh) rotate(-10deg) scale(0.9); opacity: 0; }
+}
+
+/* Main content */
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Sticker border frame */
+.frame {
+  background: white;
+  border-radius: 30px;
+  padding: 40px 30px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow:
+    0 0 0 6px #ff2d78,
+    0 0 0 12px #ffb347,
+    0 0 0 18px #ff2d78,
+    8px 8px 30px rgba(0,0,0,0.25);
+  position: relative;
+  animation: frameWobble 2s ease-in-out infinite;
+}
+
+@keyframes frameWobble {
+  0%, 100% { transform: rotate(-1deg); }
+  50%       { transform: rotate(1deg); }
+}
+
+/* Corner hearts on frame */
+.frame::before, .frame::after,
+.frame .corner-tl, .frame .corner-tr {
+  position: absolute;
+  font-size: 2.2rem;
+  animation: spin 3s linear infinite;
+}
+.frame::before  { content: '💕'; top: -18px; left: -18px; }
+.frame::after   { content: '💕'; bottom: -18px; right: -18px; animation-direction: reverse; }
+.frame .corner-tl { content: ''; top: -18px; right: -18px; }
+.frame .corner-tl::before { content: '💕'; }
+.frame .corner-tr { content: ''; bottom: -18px; left: -18px; animation-direction: reverse; }
+.frame .corner-tr::before { content: '💕'; }
+
+@keyframes spin {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(10deg) scale(1.2); }
+  75% { transform: rotate(-10deg) scale(0.9); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Glitter title */
+.glitter-bar {
+  font-size: 1rem;
+  letter-spacing: 4px;
+  color: #ff2d78;
+  margin-bottom: 8px;
+  animation: glitterBlink 0.8s steps(1) infinite;
+}
+@keyframes glitterBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Name */
+.name {
+  font-family: 'Pacifico', cursive;
+  font-size: 3.5rem;
+  background: linear-gradient(90deg, #ff2d78, #ff8c00, #ff2d78);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 2s linear infinite;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  text-shadow: none;
+  filter: drop-shadow(2px 2px 0px rgba(255,45,120,0.3));
+}
+
+@keyframes shine {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Big pulsing heart */
+.big-heart {
+  font-size: 5rem;
+  display: block;
+  animation: heartbeat 0.8s ease-in-out infinite;
+  margin: 10px 0;
+  filter: drop-shadow(0 0 15px rgba(255, 45, 120, 0.8));
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.3); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.2); }
+  70%       { transform: scale(1); }
+}
+
+/* Main message */
+.message {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.9rem;
+  color: #c0005a;
+  line-height: 1.4;
+  margin: 12px 0;
+  text-shadow: 2px 2px 0 rgba(255,255,255,0.8), 3px 3px 0 rgba(255,45,120,0.2);
+}
+
+.message .highlight {
+  display: inline-block;
+  background: #ff2d78;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 20px;
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+/* Heart row */
+.heart-row {
+  font-size: 1.8rem;
+  margin: 12px 0;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.heart-row span {
+  display: inline-block;
+  animation: popBounce 1s ease-in-out infinite;
+}
+.heart-row span:nth-child(1) { animation-delay: 0s; }
+.heart-row span:nth-child(2) { animation-delay: 0.1s; }
+.heart-row span:nth-child(3) { animation-delay: 0.2s; }
+.heart-row span:nth-child(4) { animation-delay: 0.3s; }
+.heart-row span:nth-child(5) { animation-delay: 0.4s; }
+.heart-row span:nth-child(6) { animation-delay: 0.5s; }
+.heart-row span:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes popBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-8px) scale(1.3); }
+}
+
+/* Sub message */
+.sub {
+  font-size: 0.95rem;
+  color: #aa0044;
+  margin-top: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Button */
+.kiss-btn {
+  margin-top: 22px;
+  background: linear-gradient(135deg, #ff2d78, #ff6eb4);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 32px;
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255,45,120,0.5), 0 0 0 4px #ffb347;
+  transition: transform 0.1s;
+  letter-spacing: 1px;
+}
+.kiss-btn:active {
+  transform: scale(0.95);
+}
+
+/* Explosion popup */
+.pop-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 45, 120, 0.3);
+  backdrop-filter: blur(4px);
+}
+.pop-overlay.show {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.pop-box {
+  background: white;
+  border-radius: 30px;
+  padding: 40px 30px;
+  font-size: 3rem;
+  box-shadow: 0 0 0 6px #ff2d78, 0 20px 60px rgba(255,45,120,0.4);
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.6);
+  text-align: center;
+}
+@keyframes popIn {
+  0% { transform: scale(0) rotate(-20deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.pop-box p {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.6rem;
+  color: #ff2d78;
+  margin-top: 10px;
+}
+
+/* Sticker stamps around */
+.stamp {
+  position: absolute;
+  font-size: 2.5rem;
+  animation: stampWobble 2.5s ease-in-out infinite;
+  z-index: 2;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+@keyframes stampWobble {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50%       { transform: rotate(8deg) scale(1.1); }
+}
+.s1 { top: 20px; left: 10px; animation-delay: 0s; }
+.s2 { top: 20px; right: 10px; animation-delay: 0.4s; }
+.s3 { bottom: 80px; left: 5px; animation-delay: 0.8s; }
+.s4 { bottom: 80px; right: 5px; animation-delay: 1.2s; }
+```
+
+  </style>
+</head>
+<body>
+
+  <!-- Floating hearts background -->
+
+  <div class="hearts-bg" id="heartsContainer"></div>
+  <div class="kisses-bg" id="kissContainer"></div>
+
+  <!-- Corner stickers -->
+
+  <div class="stamp s1">🌸</div>
+  <div class="stamp s2">⭐</div>
+  <div class="stamp s3">🦋</div>
+  <div class="stamp s4">🌈</div>
+
+  <div class="container">
+    <div class="frame">
+      <div class="corner-tl"></div>
+      <div class="corner-tr"></div>
+
+```
+  <div class="glitter-bar">✨ ✨ ✨ ✨ ✨</div>
+
+  <div class="name">Sylvia</div>
+
+  <span class="big-heart">❤️</span>
+
+  <div class="message">
+    je t'aime<br>
+    <span class="highlight">si tant !!!</span>
+  </div>
+
+  <div class="heart-row">
+    <span>💖</span><span>💗</span><span>💓</span><span>💞</span><span>💕</span><span>💝</span><span>💘</span>
+  </div>
+
+  <div class="sub">🌟 vraiment vraiment vraiment 🌟</div>
+
+  <button class="kiss-btn" onclick="boom()">
+    💋 Clique ici 💋
+  </button>
+</div>
+```
+
+  </div>
+
+  <script>
+    // Generate floating hearts
+    const container = document.getElementById('heartsContainer');
+    const emojis = ['❤️','💖','💗','💓','💞','💕','💝','💘','🩷','♥️'];
+
+    function createHeart() {
+      const h = document.createElement('div');
+      h.className = 'heart-float';
+      h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.top = '-80px';
+      h.style.fontSize = (1.2 + Math.random() * 2.8) + 'rem';
+      const dur = 3 + Math.random() * 5;
+      h.style.animationDuration = dur + 's';
+      container.appendChild(h);
+      setTimeout(() => h.remove(), (dur + 0.5) * 1000);
+    }
+
+    // Initial burst
+    for (let i = 0; i < 30; i++) setTimeout(createHeart, i * 100);
+    // Continuous rain
+    setInterval(createHeart, 300);
+
+    // Kiss explosion
+    const kisses = ['💋','😘','💋','💋','😚','💋','😘','💋'];
+    let kissInterval = null;
+    let kissActive = false;
+
+    function createKiss(x, y) {
+      const k = document.createElement('div');
+      k.className = 'heart-float kiss-fall';
+      k.textContent = kisses[Math.floor(Math.random() * kisses.length)];
+      const startX = x !== undefined ? x : Math.random() * 100;
+      k.style.left = startX + (x !== undefined ? 'px' : 'vw');
+      k.style.top = (y !== undefined ? y + 'px' : '-60px');
+      k.style.fontSize = (1.5 + Math.random() * 3) + 'rem';
+      const dur = 1.5 + Math.random() * 3;
+      k.style.animationDuration = dur + 's';
+      document.getElementById('kissContainer').appendChild(k);
+      setTimeout(() => k.remove(), (dur + 0.3) * 1000);
+    }
+
+    function boom(e) {
+      if (kissActive) {
+        // Stop the madness
+        clearInterval(kissInterval);
+        kissActive = false;
+        document.querySelector('.kiss-btn').textContent = '💋 Clique ici 💋';
+        return;
+      }
+      kissActive = true;
+      document.querySelector('.kiss-btn').textContent = '🛑 Stop !!';
+
+      // Massive initial burst
+      for (let i = 0; i < 80; i++) {
+        setTimeout(() => createKiss(), i * 20);
+      }
+      // Sustained rain of kisses
+      kissInterval = setInterval(() => {
+        for (let j = 0; j < 5; j++) createKiss();
+      }, 80);
+    }
+  </script>
+
+</body>
+</html>

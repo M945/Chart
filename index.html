@@ -1,411 +1,1003 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Sylvia 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corum R Start — Décomposition commission d'arbitrage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Geist:wght@300..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.umd.min.js"></script>
+<style>
+:root {
+  --bg: #f4ede1;
+  --surface: #fbf7ee;
+  --surface-alt: #efe7d6;
+  --ink: #1a1612;
+  --ink-soft: #5a534b;
+  --ink-mute: #8a8275;
+  --rule: #d8cfbf;
+  --rule-strong: #b8ac96;
+  --danger: #a83232;
+  --danger-soft: rgba(168, 50, 50, 0.10);
+  --positive: #2d5a3d;
+  --positive-soft: rgba(45, 90, 61, 0.10);
+  --tax: #c87f3a;
+  --brok: #8a8275;
+  --capital: #3d5168;
+  --gross: #0f0e0d;
+}
 
-```
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
 body {
-  min-height: 100vh;
-  background: #ff85a1;
-  background: linear-gradient(135deg, #ff2d78, #ff85a1, #ffb347, #ff2d78, #ff6eb4);
-  background-size: 400% 400%;
-  animation: bgShift 4s ease infinite;
-  font-family: 'Comic Neue', cursive;
-  overflow-x: hidden;
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E❤️%3C/text%3E%3C/svg%3E"), auto;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+  font-feature-settings: "ss01", "cv11";
 }
 
-@keyframes bgShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Floating hearts background */
-.hearts-bg {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.kisses-bg {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  overflow: hidden;
-}
-
-.heart-float {
-  position: absolute;
-  top: -80px;
-  font-size: 2rem;
-  animation: fallDown linear infinite;
-  opacity: 0.8;
-}
-
-@keyframes fallDown {
-  0%   { transform: translateY(0) rotate(-15deg) scale(1);     opacity: 0.9; }
-  50%  { transform: translateY(50vh) rotate(15deg) scale(1.1); opacity: 0.7; }
-  100% { transform: translateY(115vh) rotate(-10deg) scale(0.9); opacity: 0; }
-}
-
-/* Main content */
 .container {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 40px 20px;
-  text-align: center;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
 }
 
-/* Sticker border frame */
-.frame {
-  background: white;
-  border-radius: 30px;
-  padding: 40px 30px;
-  max-width: 380px;
-  width: 100%;
-  box-shadow:
-    0 0 0 6px #ff2d78,
-    0 0 0 12px #ffb347,
-    0 0 0 18px #ff2d78,
-    8px 8px 30px rgba(0,0,0,0.25);
-  position: relative;
-  animation: frameWobble 2s ease-in-out infinite;
+@media (min-width: 768px) {
+  .container { padding: 3.5rem 2.5rem 5rem; }
 }
 
-@keyframes frameWobble {
-  0%, 100% { transform: rotate(-1deg); }
-  50%       { transform: rotate(1deg); }
+/* ---------- HEADER ---------- */
+header {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
-/* Corner hearts on frame */
-.frame::before, .frame::after,
-.frame .corner-tl, .frame .corner-tr {
-  position: absolute;
-  font-size: 2.2rem;
-  animation: spin 3s linear infinite;
-}
-.frame::before  { content: '💕'; top: -18px; left: -18px; }
-.frame::after   { content: '💕'; bottom: -18px; right: -18px; animation-direction: reverse; }
-.frame .corner-tl { content: ''; top: -18px; right: -18px; }
-.frame .corner-tl::before { content: '💕'; }
-.frame .corner-tr { content: ''; bottom: -18px; left: -18px; animation-direction: reverse; }
-.frame .corner-tr::before { content: '💕'; }
-
-@keyframes spin {
-  0% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(10deg) scale(1.2); }
-  75% { transform: rotate(-10deg) scale(0.9); }
-  100% { transform: rotate(0deg) scale(1); }
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: var(--danger);
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
 }
 
-/* Glitter title */
-.glitter-bar {
-  font-size: 1rem;
-  letter-spacing: 4px;
-  color: #ff2d78;
-  margin-bottom: 8px;
-  animation: glitterBlink 0.8s steps(1) infinite;
-}
-@keyframes glitterBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.8rem;
 }
 
-/* Name */
-.name {
-  font-family: 'Pacifico', cursive;
-  font-size: 3.5rem;
-  background: linear-gradient(90deg, #ff2d78, #ff8c00, #ff2d78);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shine 2s linear infinite;
-  line-height: 1.1;
-  margin-bottom: 6px;
-  text-shadow: none;
-  filter: drop-shadow(2px 2px 0px rgba(255,45,120,0.3));
+h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--danger);
 }
 
-@keyframes shine {
-  0%   { background-position: 0% center; }
-  100% { background-position: 200% center; }
+.deck {
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  max-width: 62ch;
+  line-height: 1.5;
 }
 
-/* Big pulsing heart */
-.big-heart {
-  font-size: 5rem;
-  display: block;
-  animation: heartbeat 0.8s ease-in-out infinite;
-  margin: 10px 0;
-  filter: drop-shadow(0 0 15px rgba(255, 45, 120, 0.8));
+/* ---------- KPIs ---------- */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin: 2.8rem 0;
 }
 
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  14%       { transform: scale(1.3); }
-  28%       { transform: scale(1); }
-  42%       { transform: scale(1.2); }
-  70%       { transform: scale(1); }
+.kpi {
+  border-top: 2px solid var(--ink);
+  padding-top: 1rem;
+  transition: border-color 0.3s;
+}
+.kpi.danger { border-top-color: var(--danger); }
+.kpi.positive { border-top-color: var(--positive); }
+
+.kpi-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
 }
 
-/* Main message */
-.message {
-  font-family: 'Pacifico', cursive;
-  font-size: 1.9rem;
-  color: #c0005a;
+.kpi-value {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 2.6rem;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.kpi-value.danger { color: var(--danger); }
+.kpi-value.positive { color: var(--positive); }
+
+.kpi-note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
   line-height: 1.4;
-  margin: 12px 0;
-  text-shadow: 2px 2px 0 rgba(255,255,255,0.8), 3px 3px 0 rgba(255,45,120,0.2);
 }
 
-.message .highlight {
-  display: inline-block;
-  background: #ff2d78;
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  transform: rotate(-2deg);
-  display: inline-block;
+/* ---------- MAIN GRID ---------- */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
-/* Heart row */
-.heart-row {
-  font-size: 1.8rem;
-  margin: 12px 0;
+@media (min-width: 960px) {
+  .main-grid {
+    grid-template-columns: 1fr 340px;
+    gap: 2rem;
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .card { padding: 2rem; }
+}
+
+.card-header {
+  margin-bottom: 1.2rem;
+}
+
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.3rem;
+}
+
+.card-subtitle {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.chart-canvas-wrapper {
+  position: relative;
+  height: 420px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .chart-canvas-wrapper { height: 480px; }
+}
+
+/* ---------- PARAMS ---------- */
+.params-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.param-group {
+  margin-bottom: 1.4rem;
+}
+
+.param-label {
   display: flex;
-  justify-content: center;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-.heart-row span {
-  display: inline-block;
-  animation: popBounce 1s ease-in-out infinite;
-}
-.heart-row span:nth-child(1) { animation-delay: 0s; }
-.heart-row span:nth-child(2) { animation-delay: 0.1s; }
-.heart-row span:nth-child(3) { animation-delay: 0.2s; }
-.heart-row span:nth-child(4) { animation-delay: 0.3s; }
-.heart-row span:nth-child(5) { animation-delay: 0.4s; }
-.heart-row span:nth-child(6) { animation-delay: 0.5s; }
-.heart-row span:nth-child(7) { animation-delay: 0.6s; }
-
-@keyframes popBounce {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50%       { transform: translateY(-8px) scale(1.3); }
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.88rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
-/* Sub message */
-.sub {
+.param-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
   font-size: 0.95rem;
-  color: #aa0044;
-  margin-top: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  color: var(--danger);
 }
 
-/* Button */
-.kiss-btn {
-  margin-top: 22px;
-  background: linear-gradient(135deg, #ff2d78, #ff6eb4);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 14px 32px;
-  font-family: 'Comic Neue', cursive;
-  font-size: 1.1rem;
-  font-weight: 700;
+input[type="range"] {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: var(--rule);
+  outline: none;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255,45,120,0.5), 0 0 0 4px #ffb347;
-  transition: transform 0.1s;
-  letter-spacing: 1px;
-}
-.kiss-btn:active {
-  transform: scale(0.95);
 }
 
-/* Explosion popup */
-.pop-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 45, 120, 0.3);
-  backdrop-filter: blur(4px);
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--ink);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid var(--surface);
+  box-shadow: 0 0 0 1px var(--ink);
 }
-.pop-overlay.show {
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--ink);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid var(--surface);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.toggle-row {
   display: flex;
-  animation: fadeIn 0.2s ease;
-}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-.pop-box {
-  background: white;
-  border-radius: 30px;
-  padding: 40px 30px;
-  font-size: 3rem;
-  box-shadow: 0 0 0 6px #ff2d78, 0 20px 60px rgba(255,45,120,0.4);
-  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.6);
-  text-align: center;
-}
-@keyframes popIn {
-  0% { transform: scale(0) rotate(-20deg); }
-  100% { transform: scale(1) rotate(0deg); }
-}
-.pop-box p {
-  font-family: 'Pacifico', cursive;
-  font-size: 1.6rem;
-  color: #ff2d78;
-  margin-top: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0;
+  font-size: 0.88rem;
+  gap: 1rem;
 }
 
-/* Sticker stamps around */
-.stamp {
+.toggle-row + .toggle-row {
+  border-top: 1px dashed var(--rule);
+}
+
+.toggle-label {
+  flex: 1;
+  line-height: 1.3;
+}
+
+.toggle {
+  position: relative;
+  width: 42px;
+  height: 22px;
+  background: var(--rule-strong);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.toggle.active { background: var(--danger); }
+.toggle::after {
+  content: '';
   position: absolute;
-  font-size: 2.5rem;
-  animation: stampWobble 2.5s ease-in-out infinite;
-  z-index: 2;
-  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+  left: 2px;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  background: var(--surface);
+  border-radius: 50%;
+  transition: transform 0.2s;
 }
-@keyframes stampWobble {
-  0%, 100% { transform: rotate(-8deg) scale(1); }
-  50%       { transform: rotate(8deg) scale(1.1); }
-}
-.s1 { top: 20px; left: 10px; animation-delay: 0s; }
-.s2 { top: 20px; right: 10px; animation-delay: 0.4s; }
-.s3 { bottom: 80px; left: 5px; animation-delay: 0.8s; }
-.s4 { bottom: 80px; right: 5px; animation-delay: 1.2s; }
-```
+.toggle.active::after { transform: translateX(20px); }
 
-  </style>
+.preset-buttons {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.preset {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+.preset:hover, .preset.active {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.params-help {
+  font-size: 0.78rem;
+  color: var(--ink-mute);
+  font-style: italic;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--rule);
+  line-height: 1.4;
+}
+
+/* ---------- SECONDARY CHART ---------- */
+.dual-card {
+  margin-bottom: 3rem;
+}
+
+.dual-card .chart-canvas-wrapper {
+  height: 320px;
+}
+
+/* ---------- TABLE ---------- */
+.scenarios-card {
+  margin-bottom: 3rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  min-width: 600px;
+}
+
+th {
+  text-align: left;
+  padding: 0.8rem 0.6rem;
+  border-bottom: 2px solid var(--ink);
+  font-weight: 500;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+td {
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+td.neg { color: var(--danger); font-weight: 500; }
+td.pos { color: var(--positive); font-weight: 500; }
+td.num { text-align: right; }
+td.tranche { font-weight: 500; }
+td.tranche-6 { color: var(--tax); }
+td.tranche-12 { color: var(--danger); }
+
+tr.highlight {
+  background: var(--danger-soft);
+}
+
+tr.win {
+  background: var(--positive-soft);
+}
+
+/* ---------- NARRATIVE ---------- */
+.narrative {
+  max-width: 760px;
+  margin-top: 4rem;
+}
+
+.narrative h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.8rem;
+  margin-bottom: 1.4rem;
+  letter-spacing: -0.015em;
+}
+
+.narrative h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin: 1.8rem 0 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+.narrative p {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.1rem;
+  line-height: 1.7;
+}
+
+.narrative strong { color: var(--ink); font-weight: 500; }
+
+.narrative .marker {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  background: var(--danger);
+  color: var(--bg);
+  padding: 0.15rem 0.5rem;
+  margin-right: 0.4rem;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.kpi-value, .card-title {
+  animation: fadeUp 0.4s ease-out;
+}
+</style>
 </head>
 <body>
+<div class="container">
 
-  <!-- Floating hearts background -->
+<header>
+  <div class="eyebrow">Modèle interactif &mdash; mai 2026</div>
+  <h1>Le partage de la plus-value chez <em>Corum R Start</em></h1>
+  <p class="deck">Décomposition de la commission d'arbitrage par tranches. Effets de seuil, zones toxiques et trou sur la valeur de réalisation. Toutes les hypothèses sont modifiables.</p>
+</header>
 
-  <div class="hearts-bg" id="heartsContainer"></div>
-  <div class="kisses-bg" id="kissContainer"></div>
+<div class="kpi-row" id="kpi-row"></div>
 
-  <!-- Corner stickers -->
-
-  <div class="stamp s1">🌸</div>
-  <div class="stamp s2">⭐</div>
-  <div class="stamp s3">🦋</div>
-  <div class="stamp s4">🌈</div>
-
-  <div class="container">
-    <div class="frame">
-      <div class="corner-tl"></div>
-      <div class="corner-tr"></div>
-
-```
-  <div class="glitter-bar">✨ ✨ ✨ ✨ ✨</div>
-
-  <div class="name">Sylvia</div>
-
-  <span class="big-heart">❤️</span>
-
-  <div class="message">
-    je t'aime<br>
-    <span class="highlight">si tant !!!</span>
+<div class="main-grid">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Décomposition du prix de vente</div>
+      <div class="card-subtitle">Où va chaque euro. Base 100 = prix de revient. Les bandes empilées montent jusqu'au prix de vente brut.</div>
+    </div>
+    <div class="chart-canvas-wrapper">
+      <canvas id="mainChart"></canvas>
+    </div>
   </div>
 
-  <div class="heart-row">
-    <span>💖</span><span>💗</span><span>💓</span><span>💞</span><span>💕</span><span>💝</span><span>💘</span>
+  <div class="card">
+    <div class="params-title">Paramètres</div>
+
+    <div class="param-group">
+      <div class="param-label">
+        <span>Frais de vente (brokerage)</span>
+        <span class="param-value" id="brok-val">2,0%</span>
+      </div>
+      <input type="range" id="brok-slider" min="0" max="50" step="1" value="20">
+    </div>
+
+    <div class="param-group">
+      <div class="param-label">
+        <span>Taux d'impôt sur PV</span>
+        <span class="param-value" id="tax-val">25%</span>
+      </div>
+      <input type="range" id="tax-slider" min="0" max="40" step="1" value="25">
+    </div>
+
+    <div class="param-group">
+      <div class="toggle-row">
+        <span class="toggle-label">Frais de vente déductibles de l'assiette fiscale</span>
+        <div class="toggle" id="brok-deduct"></div>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label">Commission Corum déductible de l'assiette fiscale</span>
+        <div class="toggle" id="corum-deduct"></div>
+      </div>
+    </div>
+
+    <div class="param-group">
+      <div class="param-label">
+        <span>Scénarios fiscaux</span>
+      </div>
+      <div class="preset-buttons">
+        <button class="preset" data-preset="strict">Strict</button>
+        <button class="preset active" data-preset="realistic">Réaliste</button>
+        <button class="preset" data-preset="lax">Permissif</button>
+      </div>
+      <div class="params-help">
+        Strict : impôt sur PV brute, rien n'est déductible.<br>
+        Réaliste : seuls les frais de cession sont déductibles. Corum non.<br>
+        Permissif : tout est déductible (hypothèse optimiste).
+      </div>
+    </div>
   </div>
-
-  <div class="sub">🌟 vraiment vraiment vraiment 🌟</div>
-
-  <button class="kiss-btn" onclick="boom()">
-    💋 Clique ici 💋
-  </button>
 </div>
-```
 
+<div class="card dual-card">
+  <div class="card-header">
+    <div class="card-title">PV brute vs PV nette : le trou aux seuils</div>
+    <div class="card-subtitle">La courbe verte plonge sous zéro juste après chaque seuil. Zones rouges = la PV brute est positive mais l'investisseur est perdant net.</div>
   </div>
+  <div class="chart-canvas-wrapper">
+    <canvas id="netChart"></canvas>
+  </div>
+</div>
 
-  <script>
-    // Generate floating hearts
-    const container = document.getElementById('heartsContainer');
-    const emojis = ['❤️','💖','💗','💓','💞','💕','💝','💘','🩷','♥️'];
+<div class="card scenarios-card">
+  <div class="card-header">
+    <div class="card-title">Scénarios chiffrés</div>
+    <div class="card-subtitle">Lignes rouges : zones où l'immeuble s'apprécie mais l'investisseur perd.</div>
+  </div>
+  <table id="scenarios-table">
+    <thead>
+      <tr>
+        <th>Prix de vente</th>
+        <th class="num">PV brute</th>
+        <th class="num">PV/PV</th>
+        <th>Tranche</th>
+        <th class="num">Corum</th>
+        <th class="num">Frais</th>
+        <th class="num">Impôt</th>
+        <th class="num">Net PV invest.</th>
+      </tr>
+    </thead>
+    <tbody id="scenarios-tbody"></tbody>
+  </table>
+</div>
 
-    function createHeart() {
-      const h = document.createElement('div');
-      h.className = 'heart-float';
-      h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      h.style.left = Math.random() * 100 + 'vw';
-      h.style.top = '-80px';
-      h.style.fontSize = (1.2 + Math.random() * 2.8) + 'rem';
-      const dur = 3 + Math.random() * 5;
-      h.style.animationDuration = dur + 's';
-      container.appendChild(h);
-      setTimeout(() => h.remove(), (dur + 0.5) * 1000);
-    }
+<div class="narrative">
+  <h2>Lecture stratégique</h2>
 
-    // Initial burst
-    for (let i = 0; i < 30; i++) setTimeout(createHeart, i * 100);
-    // Continuous rain
-    setInterval(createHeart, 300);
+  <h3><span class="marker">01</span>Le seuil est une falaise, pas une frontière</h3>
+  <p>Quand le ratio PV/prix de vente franchit 7%, la commission Corum passe instantanément de 0€ à 6% du prix de vente entier. À 13%, elle double encore. L'investisseur voit sa PV nette plonger en territoire négatif sur des centimes de prix. C'est un effet de seuil que l'AMF oblige Corum à mentionner dans son avertissement aux investisseurs, page 4 de la note. Personne ne lit la page 4.</p>
 
-    // Kiss explosion
-    const kisses = ['💋','😘','💋','💋','😚','💋','😘','💋'];
-    let kissInterval = null;
-    let kissActive = false;
+  <h3><span class="marker">02</span>L'assiette fiscale ne protège pas l'investisseur</h3>
+  <p>L'impôt sur la plus-value est calculé sur la PV brute, au mieux minorée des frais de cession au sens fiscal. La commission Corum n'étant généralement pas déductible (c'est une charge de gestion de la SCPI, pas un frais de cession), l'investisseur paie l'impôt sur de la valeur que Corum lui a déjà confisquée. Effet de double peine. Active le toggle "Corum déductible" pour voir l'écart.</p>
 
-    function createKiss(x, y) {
-      const k = document.createElement('div');
-      k.className = 'heart-float kiss-fall';
-      k.textContent = kisses[Math.floor(Math.random() * kisses.length)];
-      const startX = x !== undefined ? x : Math.random() * 100;
-      k.style.left = startX + (x !== undefined ? 'px' : 'vw');
-      k.style.top = (y !== undefined ? y + 'px' : '-60px');
-      k.style.fontSize = (1.5 + Math.random() * 3) + 'rem';
-      const dur = 1.5 + Math.random() * 3;
-      k.style.animationDuration = dur + 's';
-      document.getElementById('kissContainer').appendChild(k);
-      setTimeout(() => k.remove(), (dur + 0.3) * 1000);
-    }
+  <h3><span class="marker">03</span>Le seuil 13% affiché par Corum est trompeur</h3>
+  <p>Avec les hypothèses réalistes (impôt 25%, frais de vente déductibles, Corum non déductible), il faut une appréciation d'au moins <strong>11% en tranche 6%</strong> ou de <strong>22% en tranche 12%</strong> pour que l'investisseur soit gagnant net. Le seuil 13% déclenche la commission, pas la rentabilité de l'associé. Entre 13% et 22% d'appréciation, l'immeuble est en plus-value mais l'investisseur paie pour permettre à Corum de toucher.</p>
 
-    function boom(e) {
-      if (kissActive) {
-        // Stop the madness
-        clearInterval(kissInterval);
-        kissActive = false;
-        document.querySelector('.kiss-btn').textContent = '💋 Clique ici 💋';
-        return;
+  <h3><span class="marker">04</span>Conséquence cachée : la valeur de réalisation se vide</h3>
+  <p>Une cession dans une zone toxique réduit la trésorerie nette de la SCPI tout en affichant une plus-value comptable. La valeur de réalisation baisse. L'investisseur lambda regarde le TDVM et la valorisation des parts. Personne ne mesure le trou créé par les cessions toxiques. Sur la durée de vie d'une SCPI, cumuler ces cessions érode silencieusement la valeur du véhicule.</p>
+
+  <h3><span class="marker">05</span>Conflit d'intérêts non maîtrisé</h3>
+  <p>Corum n'a aucun incitatif à céder en tranche 0% (zéro commission). Donc Corum attend que la PV dépasse 7% du prix de vente avant de vendre. Ce qui peut aller contre l'intérêt des associés, qui pourraient préférer prendre une PV modérée plutôt qu'attendre un point d'entrée plus risqué. La doc évoque mollement ce conflit page 4. Le mécanisme de réserve extra-comptable est censé compenser les moins-values avant nouvelle commission, mais il est calculé sur le prix de vente, pas sur l'equity réellement engagé par les associés.</p>
+</div>
+
+<footer>
+  Modèle simplifié, base 100. N'intègre ni l'effet de levier (40% chez R Start), ni l'abattement pour durée de détention, ni les coûts d'acquisition initiaux (prime d'émission ~9%). À utiliser pour illustrer le mécanisme, pas pour calibrer une opération réelle. Les données réglementaires proviennent de la note d'information R Start (visa AMF n°26-06 du 4 mars 2026) et du DIC du 20 mai 2026.
+</footer>
+
+</div>
+
+<script>
+const COST = 100;
+let state = {
+  brok_rate: 0.02,
+  tax_rate: 0.25,
+  brok_deductible: true,
+  corum_deductible: false
+};
+
+function computeAt(sale) {
+  const pv = sale - COST;
+  const ratio = sale > 0 ? pv / sale : 0;
+  let corum = 0;
+  let tranche = "0%";
+  if (pv > 0 && ratio >= 0.07 && ratio < 0.13) { corum = 0.06 * sale; tranche = "6%"; }
+  else if (pv > 0 && ratio >= 0.13) { corum = 0.12 * sale; tranche = "12%"; }
+
+  const brok = state.brok_rate * sale;
+  let tax_base = pv;
+  if (state.brok_deductible) tax_base -= brok;
+  if (state.corum_deductible) tax_base -= corum;
+  tax_base = Math.max(tax_base, 0);
+  const tax = state.tax_rate * tax_base;
+
+  const total = sale - corum - brok - tax;
+  const net_pv = total - COST;
+
+  return { sale, pv, ratio, corum, tranche, brok, tax_base, tax, total, net_pv };
+}
+
+function findBreakEven(tranche_rate) {
+  const a = 1 - tranche_rate - state.brok_rate;
+  const b = 1 - (state.brok_deductible ? state.brok_rate : 0) - (state.corum_deductible ? tranche_rate : 0);
+  const denom = a - state.tax_rate * b;
+  return COST * (1 - state.tax_rate) / denom;
+}
+
+let mainChart = null;
+let netChart = null;
+
+function buildData() {
+  const sales = [];
+  const data = {
+    capital: [], pv_pos: [], tax: [], brok: [], corum: [], net_pv: [], pv_brute: []
+  };
+
+  for (let s = 95; s <= 132.01; s += 0.05) {
+    const r = computeAt(s);
+    sales.push(s);
+    const recovered = Math.max(0, Math.min(r.total, COST));
+    const pv_pos = Math.max(0, r.net_pv);
+    data.capital.push(recovered);
+    data.pv_pos.push(pv_pos);
+    data.tax.push(r.tax);
+    data.brok.push(r.brok);
+    data.corum.push(r.corum);
+    data.net_pv.push(r.net_pv);
+    data.pv_brute.push(r.pv);
+  }
+
+  return { sales, data };
+}
+
+function renderMainChart() {
+  const { sales, data } = buildData();
+  const seuil1 = COST / 0.93;
+  const seuil2 = COST / 0.87;
+
+  if (mainChart) mainChart.destroy();
+
+  const ctx = document.getElementById('mainChart').getContext('2d');
+
+  mainChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: sales,
+      datasets: [
+        {
+          label: 'Capital récupéré',
+          data: data.capital,
+          backgroundColor: 'rgba(61, 81, 104, 0.75)',
+          borderColor: 'rgba(61, 81, 104, 0)',
+          borderWidth: 0,
+          fill: true,
+          pointRadius: 0,
+          tension: 0
+        },
+        {
+          label: 'PV nette investisseur',
+          data: data.pv_pos,
+          backgroundColor: 'rgba(45, 90, 61, 0.85)',
+          borderWidth: 0,
+          fill: true,
+          pointRadius: 0,
+          tension: 0
+        },
+        {
+          label: 'Impôt sur PV',
+          data: data.tax,
+          backgroundColor: 'rgba(200, 127, 58, 0.8)',
+          borderWidth: 0,
+          fill: true,
+          pointRadius: 0,
+          tension: 0
+        },
+        {
+          label: 'Frais de vente',
+          data: data.brok,
+          backgroundColor: 'rgba(138, 130, 117, 0.75)',
+          borderWidth: 0,
+          fill: true,
+          pointRadius: 0,
+          tension: 0
+        },
+        {
+          label: 'Commission Corum',
+          data: data.corum,
+          backgroundColor: 'rgba(168, 50, 50, 0.9)',
+          borderWidth: 0,
+          fill: true,
+          pointRadius: 0,
+          tension: 0
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      animation: { duration: 300 },
+      scales: {
+        x: {
+          type: 'linear',
+          min: 95,
+          max: 132,
+          title: { display: true, text: 'Prix de vente (base 100)', font: { family: 'Geist', size: 12, weight: '500' }, color: '#5a534b' },
+          ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#5a534b' },
+          grid: { color: 'rgba(26,22,18,0.06)' }
+        },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          max: 145,
+          title: { display: true, text: 'Composition (€)', font: { family: 'Geist', size: 12, weight: '500' }, color: '#5a534b' },
+          ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#5a534b' },
+          grid: { color: 'rgba(26,22,18,0.06)' }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { font: { family: 'Geist', size: 11 }, boxWidth: 14, boxHeight: 14, padding: 12, color: '#1a1612' }
+        },
+        tooltip: {
+          backgroundColor: '#1a1612',
+          padding: 12,
+          titleFont: { family: 'Geist', size: 12, weight: '500' },
+          bodyFont: { family: 'JetBrains Mono', size: 11 },
+          callbacks: {
+            title: (items) => 'Vente = ' + Number(items[0].parsed.x).toFixed(2) + ' €',
+            label: (item) => item.dataset.label + ': ' + item.parsed.y.toFixed(2) + ' €'
+          }
+        },
+        annotation: {
+          annotations: {
+            seuil1: {
+              type: 'line', xMin: seuil1, xMax: seuil1,
+              borderColor: 'rgba(168, 50, 50, 0.7)', borderWidth: 1.5, borderDash: [5, 5],
+              label: { content: 'Seuil 7%', display: true, position: 'start',
+                       backgroundColor: 'rgba(168, 50, 50, 0.95)', color: '#fbf7ee',
+                       padding: 5, font: { family: 'JetBrains Mono', size: 10, weight: 'bold' }}
+            },
+            seuil2: {
+              type: 'line', xMin: seuil2, xMax: seuil2,
+              borderColor: 'rgba(168, 50, 50, 0.7)', borderWidth: 1.5, borderDash: [5, 5],
+              label: { content: 'Seuil 13%', display: true, position: 'start',
+                       backgroundColor: 'rgba(168, 50, 50, 0.95)', color: '#fbf7ee',
+                       padding: 5, font: { family: 'JetBrains Mono', size: 10, weight: 'bold' }}
+            },
+            cost_line: {
+              type: 'line', yMin: 100, yMax: 100,
+              borderColor: 'rgba(26,22,18,0.35)', borderWidth: 1, borderDash: [2, 4],
+              label: { content: 'Prix de revient', display: true, position: 'start',
+                       backgroundColor: 'rgba(26,22,18,0.8)', color: '#fbf7ee',
+                       padding: 4, font: { family: 'JetBrains Mono', size: 9 }}
+            }
+          }
+        }
       }
-      kissActive = true;
-      document.querySelector('.kiss-btn').textContent = '🛑 Stop !!';
-
-      // Massive initial burst
-      for (let i = 0; i < 80; i++) {
-        setTimeout(() => createKiss(), i * 20);
-      }
-      // Sustained rain of kisses
-      kissInterval = setInterval(() => {
-        for (let j = 0; j < 5; j++) createKiss();
-      }, 80);
     }
-  </script>
+  });
+}
 
+function renderNetChart() {
+  const { sales, data } = buildData();
+  const seuil1 = COST / 0.93;
+  const seuil2 = COST / 0.87;
+  const be6 = findBreakEven(0.06);
+  const be12 = findBreakEven(0.12);
+
+  if (netChart) netChart.destroy();
+
+  const ctx = document.getElementById('netChart').getContext('2d');
+
+  // Split net_pv into positive and negative for coloring
+  const netPos = data.net_pv.map(v => v >= 0 ? v : null);
+  const netNeg = data.net_pv.map(v => v < 0 ? v : null);
+
+  netChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: sales,
+      datasets: [
+        {
+          label: 'PV nette investisseur (positive)',
+          data: netPos,
+          backgroundColor: 'rgba(45, 90, 61, 0.35)',
+          borderColor: 'rgba(45, 90, 61, 1)',
+          borderWidth: 2.5,
+          fill: { target: 'origin', above: 'rgba(45, 90, 61, 0.25)' },
+          pointRadius: 0,
+          spanGaps: false,
+          tension: 0
+        },
+        {
+          label: 'PV nette investisseur (négative)',
+          data: netNeg,
+          backgroundColor: 'rgba(168, 50, 50, 0.35)',
+          borderColor: 'rgba(168, 50, 50, 1)',
+          borderWidth: 2.5,
+          fill: { target: 'origin', below: 'rgba(168, 50, 50, 0.3)' },
+          pointRadius: 0,
+          spanGaps: false,
+          tension: 0
+        },
+        {
+          label: 'PV brute (gain immobilier)',
+          data: data.pv_brute,
+          borderColor: 'rgba(15, 14, 13, 0.6)',
+          borderWidth: 1.8,
+          borderDash: [6, 4],
+          fill: false,
+          pointRadius: 0,
+          tension: 0
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      animation: { duration: 300 },
+      scales: {
+        x: {
+          type: 'linear',
+          min: 95,
+          max: 132,
+          title: { display: true, text: 'Prix de vente (base 100)', font: { family: 'Geist', size: 12, weight: '500' }, color: '#5a534b' },
+          ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#5a534b' },
+          grid: { color: 'rgba(26,22,18,0.06)' }
+        },
+        y: {
+          beginAtZero: false,
+          suggestedMin: -7,
+          suggestedMax: 22,
+          title: { display: true, text: 'Plus-value (€)', font: { family: 'Geist', size: 12, weight: '500' }, color: '#5a534b' },
+          ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#5a534b' },
+          grid: { color: 'rgba(26,22,18,0.06)' }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { font: { family: 'Geist', size: 11 }, boxWidth: 14, boxHeight: 14, padding: 12, color: '#1a1612' }
+        },
+        tooltip: {
+          backgroundColor: '#1a1612',
+          padding: 12,
+          titleFont: { family: 'Geist', size: 12 },
+          bodyFont: { family: 'JetBrains Mono', size: 11 },
+          callbacks: {
+            title: (items) => 'Vente = ' + Number(items[0].parsed.x).toFixed(2) + ' €',
+            label: (item) => item.dataset.label + ': ' + item.parsed.y.toFixed(2) + ' €'
+          }
+        },
+        annotation: {
+          annotations: {
+            zero: {
+              type: 'line', yMin: 0, yMax: 0,
+              borderColor: 'rgba(26,22,18,0.5)', borderWidth: 1
+            },
+            seuil1: {
+              type: 'line', xMin: seuil1, xMax: seuil1,
+              borderColor: 'rgba(168, 50, 50, 0.7)', borderWidth: 1.5, borderDash: [5, 5]
+            },
+            seuil2: {
+              type: 'line', xMin: seuil2, xMax: seuil2,
+              borderColor: 'rgba(168, 50, 50, 0.7)', borderWidth: 1.5, borderDash: [5, 5]
+            },
+            tox1: {
+              type: 'box', xMin: seuil1, xMax: be6,
+              yMin: -7, yMax: 22,
+              backgroundColor: 'rgba(168, 50, 50, 0.10)',
+              borderWidth: 0
+            },
+            tox2: {
+              type: 'box', xMin: seuil2, xMax: be12,
+              yMin: -7, yMax: 22,
+              backgroundColor: 'rgba(168, 50, 50, 0.10)',
+              borderWidth: 0
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function renderScenarios() {
+  const tbody = document.getElementById('scenarios-tbody');
+  const samples = [105, 107, 107.6, 110, 111.5, 113, 114.5, 115, 118, 121, 122.5, 125, 130];
+  tbody.innerHTML = samples.map(s => {
+    const r = computeAt(s);
+    let rowCls = '';
+    if (r.net_pv < 0 && r.pv > 0) rowCls = 'highlight';
+    else if (r.net_pv > 0) rowCls = 'win';
+    const netCls = r.net_pv < 0 ? 'neg' : 'pos';
+    const trCls = r.tranche === '6%' ? 'tranche-6' : (r.tranche === '12%' ? 'tranche-12' : '');
+    return `<tr class="${rowCls}">
+      <td>${s.toFixed(2)}</td>
+      <td class="num">+${r.pv.toFixed(2)}</td>
+      <td class="num">${(r.ratio * 100).toFixed(2)}%</td>
+      <td class="tranche ${trCls}">${r.tranche}</td>
+      <td class="num">${r.corum.toFixed(2)}</td>
+      <td class="num">${r.brok.toFixed(2)}</td>
+      <td class="num">${r.tax.toFixed(2)}</td>
+      <td class="num ${netCls}">${r.net_pv >= 0 ? '+' : ''}${r.net_pv.toFixed(2)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderKPIs() {
+  const seuil1 = 100 / 0.93;
+  const seuil2 = 100 / 0.87;
+  const be6 = findBreakEven(0.06);
+  const be12 = findBreakEven(0.12);
+  const tox1 = be6 - seuil1;
+  const tox2 = be12 - seuil2;
+
+  document.getElementById('kpi-row').innerHTML = `
+    <div class="kpi danger">
+      <div class="kpi-label">Zone toxique 1 — tranche 6%</div>
+      <div class="kpi-value danger">${tox1.toFixed(2)}€</div>
+      <div class="kpi-note">Plage où la PV brute est positive mais l'investisseur perd net. De ${seuil1.toFixed(2)} à ${be6.toFixed(2)}.</div>
+    </div>
+    <div class="kpi danger">
+      <div class="kpi-label">Zone toxique 2 — tranche 12%</div>
+      <div class="kpi-value danger">${tox2.toFixed(2)}€</div>
+      <div class="kpi-note">Plage où la PV brute est positive mais l'investisseur perd net. De ${seuil2.toFixed(2)} à ${be12.toFixed(2)}.</div>
+    </div>
+    <div class="kpi positive">
+      <div class="kpi-label">Appréciation minimale pour gain net</div>
+      <div class="kpi-value positive">+${(be12-100).toFixed(1)}%</div>
+      <div class="kpi-note">Au-dessus du prix de revient, en tranche 12%. Le seuil affiché de 13% est trompeur.</div>
+    </div>
+  `;
+}
+
+function render() {
+  renderMainChart();
+  renderNetChart();
+  renderScenarios();
+  renderKPIs();
+}
+
+// Events
+document.getElementById('brok-slider').addEventListener('input', (e) => {
+  state.brok_rate = e.target.value / 1000;
+  document.getElementById('brok-val').textContent = (state.brok_rate * 100).toFixed(1) + '%';
+  render();
+});
+
+document.getElementById('tax-slider').addEventListener('input', (e) => {
+  state.tax_rate = e.target.value / 100;
+  document.getElementById('tax-val').textContent = e.target.value + '%';
+  render();
+});
+
+document.getElementById('brok-deduct').addEventListener('click', (e) => {
+  state.brok_deductible = !state.brok_deductible;
+  e.currentTarget.classList.toggle('active', state.brok_deductible);
+  render();
+});
+
+document.getElementById('corum-deduct').addEventListener('click', (e) => {
+  state.corum_deductible = !state.corum_deductible;
+  e.currentTarget.classList.toggle('active', state.corum_deductible);
+  render();
+});
+
+document.querySelectorAll('.preset').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const p = btn.dataset.preset;
+    if (p === 'strict') {
+      state = { brok_rate: 0.02, tax_rate: 0.25, brok_deductible: false, corum_deductible: false };
+    } else if (p === 'realistic') {
+      state = { brok_rate: 0.02, tax_rate: 0.25, brok_deductible: true, corum_deductible: false };
+    } else {
+      state = { brok_rate: 0.02, tax_rate: 0.25, brok_deductible: true, corum_deductible: true };
+    }
+    syncUI();
+    render();
+  });
+});
+
+function syncUI() {
+  document.getElementById('brok-slider').value = state.brok_rate * 1000;
+  document.getElementById('brok-val').textContent = (state.brok_rate * 100).toFixed(1) + '%';
+  document.getElementById('tax-slider').value = state.tax_rate * 100;
+  document.getElementById('tax-val').textContent = (state.tax_rate * 100) + '%';
+  document.getElementById('brok-deduct').classList.toggle('active', state.brok_deductible);
+  document.getElementById('corum-deduct').classList.toggle('active', state.corum_deductible);
+}
+
+syncUI();
+render();
+</script>
 </body>
 </html>
